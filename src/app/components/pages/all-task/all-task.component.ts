@@ -6,6 +6,7 @@ import { PageTitleComponent } from '../../page-title/page-title.component';
 import { TaskListComponent } from '../../task-list/task-list.component';
 import { StateService } from '../../../services/state.service';
 import { ToastrService } from 'ngx-toastr';
+import { SuprSendInboxService } from '@suprsend/ngx-inbox';
 
 @Component({
   selector: 'app-all-task',
@@ -13,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [FormsModule, DatePipe, PageTitleComponent, TaskListComponent],
   templateUrl: './all-task.component.html',
   styleUrl: './all-task.component.scss',
+
 })
 export class AllTaskComponent {
   newTask = '';
@@ -20,7 +22,8 @@ export class AllTaskComponent {
   taskList: any[] = [];
   httpService = inject(HttpService);
   stateService = inject(StateService);
-  toaster = inject(ToastrService)
+  toaster = inject(ToastrService);
+  suprSendInboxService = inject(SuprSendInboxService);  // Inject Suprsend service
   ngOnInit() {
     this.stateService.searchSubject.subscribe((value) => {
       console.log("search",value)
@@ -33,12 +36,14 @@ export class AllTaskComponent {
       }
     });
     this.getAllTasks();
+
+
   }
   addTask() {
     console.log('addTask', this.newTask);
     this.httpService.addTask(this.newTask).subscribe(() => {
       this.toaster.success("Task has been succesfully added.","Success");
-      this.newTask = '';
+             this.newTask = '';
       this.getAllTasks();
     });
   }

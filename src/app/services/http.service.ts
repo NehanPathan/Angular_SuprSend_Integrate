@@ -11,7 +11,8 @@ export class HttpService {
 
   addTask(task:string){
     return this.httpClient.post("http://localhost:3000/tasks",{
-      title:task
+      title:task,
+      completed: false
     })
   }
   getAllTasks(){
