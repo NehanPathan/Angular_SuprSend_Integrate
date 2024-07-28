@@ -5,6 +5,7 @@ import { HttpService } from '../../../services/http.service';
 import { PageTitleComponent } from '../../page-title/page-title.component';
 import { TaskListComponent } from '../../task-list/task-list.component';
 import { StateService } from '../../../services/state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-task',
@@ -19,6 +20,7 @@ export class AllTaskComponent {
   taskList: any[] = [];
   httpService = inject(HttpService);
   stateService = inject(StateService);
+  toaster = inject(ToastrService)
   ngOnInit() {
     this.stateService.searchSubject.subscribe((value) => {
       console.log("search",value)
@@ -35,6 +37,7 @@ export class AllTaskComponent {
   addTask() {
     console.log('addTask', this.newTask);
     this.httpService.addTask(this.newTask).subscribe(() => {
+      this.toaster.success("Task has been succesfully added.","Success");
       this.newTask = '';
       this.getAllTasks();
     });
@@ -54,7 +57,11 @@ export class AllTaskComponent {
   onImportant(task: any) {
     task.important = true;
     this.httpService.updateTask(task).subscribe(() => {
+      this.toaster.info("This Task is marked as important","Info");
       this.getAllTasks();
+    },()=>{
+      this.toaster.error("Something is failed on server","Error");
+
     });
   }
 }
