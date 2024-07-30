@@ -7,6 +7,7 @@ import { TaskListComponent } from '../../task-list/task-list.component';
 import { StateService } from '../../../services/state.service';
 import { ToastrService } from 'ngx-toastr';
 import { SuprSendInboxService } from '@suprsend/ngx-inbox';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-all-task',
@@ -24,7 +25,17 @@ export class AllTaskComponent {
   stateService = inject(StateService);
   toaster = inject(ToastrService);
   suprSendInboxService = inject(SuprSendInboxService);  // Inject Suprsend service
+  configService = inject(ConfigService);
   ngOnInit() {
+
+      // Identify user with SuprSendInboxService
+    // this.configService.getSubscriberId('nehan26').subscribe(response => {
+    //   this.suprSendInboxService.identifyUser(undefined, response.subscriber_id);
+    // });
+    this.suprSendInboxService.identifyUser("nehan26","2MjDIl42moS9aDK_QWRj1pMdhhaj_z38y6Rwc8nu-CQ" );
+
+
+
     this.stateService.searchSubject.subscribe((value) => {
       console.log("search",value)
       if (value) {

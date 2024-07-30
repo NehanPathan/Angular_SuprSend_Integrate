@@ -6,19 +6,23 @@ import { Injectable, inject } from '@angular/core';
 })
 export class HttpService {
 
-  httpClient = inject(HttpClient);
+  private httpClient = inject(HttpClient);
+  private baseUrl = 'http://localhost:3000/tasks';
+
   constructor() { }
 
-  addTask(task:string){
-    return this.httpClient.post("http://localhost:3000/tasks",{
-      title:task,
+  addTask(task: string) {
+    return this.httpClient.post(this.baseUrl, {
+      title: task,
       completed: false
-    })
+    });
   }
-  getAllTasks(){
-     return this.httpClient.get("http://localhost:3000/tasks");
+
+  getAllTasks() {
+    return this.httpClient.get(this.baseUrl);
   }
-  updateTask(task:any){
-    return this.httpClient.put("http://localhost:3000/tasks/"+task.id,task)
+
+  updateTask(task: any) {
+    return this.httpClient.put(`${this.baseUrl}/${task.id}`, task);
   }
 }

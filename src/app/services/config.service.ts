@@ -1,19 +1,19 @@
-// src/app/services/config.service.ts
+// config.service.ts
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
-  get workspaceKey(): string {
-    return '3XS8CrMemay76qceSQ4B';
-  }
+  public workspaceKey: string = 'j0gNn0uaK0gR56rcdHWq';
+  public workspaceSecret: string = 'SS.WSS.J6gsAr6dILkKreRdN1zIIRN6BN07sae0fWXbKATo';
+  // public subscriberId: string = 'nehan26'; // Replace with dynamic value
 
-  get workspaceSecret(): string {
-    return 'SS.WSS.o0NvKJAmvF7s5Jr1fGEVLuqqeIqZ7BJoPKrFxSGy';
-  }
+  constructor(private http: HttpClient) {}
 
-  get distinctId(): string {
-    return 'pathannehan26@gmail.com';
-  }
+  // getSubscriberId(distinctId: string): Observable<{ subscriber_id: string }> {
+  //   return this.http.post<{ subscriber_id: string }>('/api/generate-subscriber-id', { distinctId });
+  // }
 }
