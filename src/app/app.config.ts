@@ -5,12 +5,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { SuprSendInboxModule, SuprSendInboxService } from '@suprsend/ngx-inbox';
 import { ConfigService } from './services/config.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { ɵBrowserAnimationBuilder } from '@angular/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideToastr(),
+    importProvidersFrom(ɵBrowserAnimationBuilder), // Import BrowserAnimationsModule
     importProvidersFrom(SuprSendInboxModule),
     {
       provide: SuprSendInboxService,

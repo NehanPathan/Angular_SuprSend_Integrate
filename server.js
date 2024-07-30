@@ -22,7 +22,7 @@ server.post('/tasks', async (req, res, next) => {
     const saveResponse = await user.save();
     console.log('User saved response:', saveResponse);
 
-    const event = new Event("nehan26", "new_task_added", { task: task.title });
+    const event = new Event("nehan31", "Angular_task", { task: task.title });
     const eventResponse = await supr_client.track_event(event);
     console.log('Event tracking response:', eventResponse);
 

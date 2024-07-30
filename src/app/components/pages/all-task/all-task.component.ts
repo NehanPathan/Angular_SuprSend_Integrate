@@ -28,11 +28,7 @@ export class AllTaskComponent {
   configService = inject(ConfigService);
   ngOnInit() {
 
-      // Identify user with SuprSendInboxService
-    // this.configService.getSubscriberId('nehan26').subscribe(response => {
-    //   this.suprSendInboxService.identifyUser(undefined, response.subscriber_id);
-    // });
-    this.suprSendInboxService.identifyUser("nehan26","2MjDIl42moS9aDK_QWRj1pMdhhaj_z38y6Rwc8nu-CQ" );
+
 
 
 
